@@ -32,7 +32,7 @@ function PlanList() {
 
         <Button variant="success" onClick={() => setShowBookForm(true)}>
           <Icon path={mdiPlusBoxOutline} size={1.5} color={"white"}/>{" "}
-          Create a pičus
+          Create a book
         </Button>
       </div>
 
