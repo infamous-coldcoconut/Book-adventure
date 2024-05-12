@@ -17,7 +17,6 @@ function BookRoute({ setShowBookForm }) {
       {book ? (
         <>
           <BookDetail book={book} />
-
           <div
             style={{
               display: "grid",

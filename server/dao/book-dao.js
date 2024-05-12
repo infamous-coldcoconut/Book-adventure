@@ -60,7 +60,7 @@ function remove(bookId) {
 }
 
 // Method to list books in a folder
-function list() {
+function list(userId) {
   try {
     const files = fs.readdirSync(bookFolderPath);
     const bookList = files.map((file) => {

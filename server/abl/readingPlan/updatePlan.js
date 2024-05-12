@@ -18,8 +18,8 @@ const schema = {
     //      totalBooks:{type: "integer"},
     //    }
     // ]
-    totalPages: { type: "string", format: "integer" },
-    totalBooks: { type: "string", format: "integer" },
+    totalPages: { type: "integer" },
+    totalBooks: { type: "integer" },
   },
   required: ["id"],
   additionalProperties: false,
@@ -29,6 +29,9 @@ async function UpdateAbl(req, res) {
   try {
     let readingPlan = req.body;
 
+    readingPlan.totalPages = parseInt(readingPlan.totalPages);
+    readingPlan.totalBooks = parseInt(readingPlan.totalBooks);
+    
     // validate input
     const valid = ajv.validate(schema, readingPlan);
     if (!valid) {

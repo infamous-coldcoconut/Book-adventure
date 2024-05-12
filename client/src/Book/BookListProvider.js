@@ -8,9 +8,21 @@ function BookListProvider({ children }) {
     data: null,
   });
 
+  const { loggedInUser } = useContext(UserContext);
+
   useEffect(() => {
     handleLoad();
-  }, []);
+  }, [loggedInUser]);
+
+  async function handleLoad() {
+    if (!loggedInUser) {
+      setBookLoadObject({
+          state: "ready",
+          data: null,
+      });
+      return;
+    }
+  }
 
   async function handleLoad() {
     setBookLoadObject((current) => ({ ...current, state: "pending" }));
@@ -20,6 +32,7 @@ function BookListProvider({ children }) {
     const responseJson = await response.json();
     if (response.status < 400) {
       setBookLoadObject({ state: "ready", data: responseJson });
+      console.log(responseJson);
       return responseJson;
     } else {
       setBookLoadObject((current) => ({
@@ -30,6 +43,7 @@ function BookListProvider({ children }) {
       throw new Error(JSON.stringify(responseJson, null, 2));
     }
   }
+  
 
   async function handleCreate(dtoIn) {
     setBookLoadObject((current) => ({ ...current, state: "pending" }));
@@ -115,7 +129,7 @@ function BookListProvider({ children }) {
   }
 
   const value = {
-    bookState: bookLoadObject.state,
+    state: bookLoadObject.state,
     bookList: bookLoadObject.data || [],
     handlerMap: { handleCreate, handleUpdate, handleDelete },
   };

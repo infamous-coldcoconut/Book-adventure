@@ -21,6 +21,9 @@ async function UpdateBook(req, res) {
   try {
     let book = req.body;
 
+    book.pages = parseInt(book.pages);
+
+
     // validate input
     const valid = ajv.validate(schema, book);
     if (!valid) {

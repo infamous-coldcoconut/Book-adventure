@@ -6,13 +6,17 @@ function PlanDateTimeBadge({ readingPlan }) {
         <div className={"rounded"} style={componentStyle()}>
             <div className={"rounded"} style={dateStyle()}>
                 <div>{dateToShow.getDate().toString().padStart(2, "0")}</div>
-                <div>{dateToShow.toLocaleString("cs-CZ", { month: "short" })}</div>
-                <div>{dateToShow2.getDate().toString().padStart(2, "0")}</div>
-                <div>{dateToShow2.toLocaleString("cs-CZ", { month: "short" })}</div>
+                <div>{dateToShow.toLocaleString("cs-CZ", {month: "short"})}</div>
             </div>
             <div className={"rounded-bottom"} style={timeStyle()}>
-                {dateToShow.toLocaleString("cs-CZ", { timeStyle: "short" })}
-                {dateToShow2.toLocaleString("cs-CZ", { timeStyle: "short" })}
+                {dateToShow.toLocaleString("cs-CZ", {timeStyle: "short"})}
+            </div>
+            <div className={"rounded"} style={dateStyle()}>
+                <div>{dateToShow2.getDate().toString().padStart(2, "0")}</div>
+                <div>{dateToShow2.toLocaleString("cs-CZ", {month: "short"})}</div>
+            </div>
+            <div className={"rounded-bottom"} style={timeStyle()}>
+                {dateToShow2.toLocaleString("cs-CZ", {timeStyle: "short"})}
             </div>
         </div>
     );
