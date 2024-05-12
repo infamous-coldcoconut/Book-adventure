@@ -59,16 +59,21 @@ function get(readingPlanId) {
   }
   
   // Method to list readingPlans in a folder
-  function list() {
+  function list(userId) {
     try {
       const files = fs.readdirSync(readingPlanFolderPath);
-      const readingPlanList = files.map((file) => {
-        const fileData = fs.readFileSync(path.join(readingPlanFolderPath, file), "utf8");
+      const planList = files.map((file) => {
+        const fileData = fs.readFileSync(
+          path.join(readingPlanFolderPath, file),
+          "utf8"
+        );
         return JSON.parse(fileData);
       });
-      return readingPlanList;
+  
+      planList.sort((a, b) => new Date(a.date) - new Date(b.date));
+      return planList;
     } catch (error) {
-      throw { code: "failedToListReadingPlans", message: error.message };
+      throw { code: "failedToListTransaction", message: error.message };
     }
   }
 

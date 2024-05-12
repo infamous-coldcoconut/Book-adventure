@@ -1,6 +1,6 @@
-function PlanDateTimeBadge({ transaction }) {
-    const dateToShow = new Date(transaction.startDate);
-    const dateToShow2 = new Date(transaction.endDate);
+function PlanDateTimeBadge({ readingPlan }) {
+    const dateToShow = new Date(readingPlan.startDate);
+    const dateToShow2 = new Date(readingPlan.endDate)
 
     return (
         <div className={"rounded"} style={componentStyle()}>

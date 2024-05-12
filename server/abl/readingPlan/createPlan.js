@@ -8,6 +8,7 @@ const readingPlanDao = require("../../dao/readingPlan-dao.js");
 const schema = {
   type: "object",
   properties: {
+    userId: { type: "string" },
     startDate: { type: "string", format: "date-time" },
     endDate: { type: "string", format: "date-time" },
     // listOfBooks:[
@@ -20,7 +21,7 @@ const schema = {
     totalPages: { type: "integer"},
     totalBooks: { type: "integer" },
   },
-  required: ["startDate", "endDate", "totalPages", "totalBooks"],
+  required: ["userId", "startDate", "endDate", "totalPages", "totalBooks"],
   additionalProperties: false,
 };
 

@@ -26,7 +26,11 @@ function App() {
                 }
               />
               <Route
-                path="planDetail"
+                  path="/PlanList"
+                  element={<PlanList />}
+              />
+              <Route
+                path="/planDetail"
                 element={
                   <PlanProvider>
                     <PlanRoute />
@@ -34,7 +38,7 @@ function App() {
                 }
               />
               <Route
-                path="viewprogress"
+                path="/viewprogress"
                 element={
                   <ViewProgressProvider>
                     <ViewprogressRoute />

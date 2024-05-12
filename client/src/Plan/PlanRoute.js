@@ -18,7 +18,7 @@ function PlanRoute({ setShowPlanForm }) {
       {readingPlan ? (
         <>
           <PlanDateTimeBadge readingPlan={readingPlan} />
-          <PlanDetail readingPlan={readingPlan} />
+          {/* <PlanDetail readingPlan={readingPlan} /> */}
           <div
             style={{
               display: "grid",

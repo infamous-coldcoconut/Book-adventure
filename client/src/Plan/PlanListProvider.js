@@ -1,5 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext  } from "react";
 import { PlanListContext } from "./PlanListContext.js";
+import { UserContext } from "../User/UserContext";
+
 
 function PlanListProvider({ children }) {
   const [planLoadObject, setPlanLoadObject] = useState({
@@ -8,19 +10,32 @@ function PlanListProvider({ children }) {
     data: null,
   });
 
+  const { loggedInUser } = useContext(UserContext);
+
   useEffect(() => {
     handleLoad();
-  }, []);
+  }, [loggedInUser]);
 
   async function handleLoad() {
+    if (!loggedInUser) {
+      setPlanLoadObject({
+          state: "ready",
+          data: null,
+      });
+      return;
+  }
+
     setPlanLoadObject((current) => ({ ...current, state: "pending" }));
     const response = await fetch(`http://localhost:8000/readingPlan/list`, {
       method: "GET",
     });
     const responseJson = await response.json();
     if (response.status < 400) {
-      setPlanLoadObject({ state: "ready", data: responseJson });
-      return responseJson;
+      const filteredPlan = responseJson.filter(readingPlan => readingPlan.userId === loggedInUser.id);
+
+      setPlanLoadObject({ state: "ready", data: filteredPlan });
+      console.log(filteredPlan);
+      return filteredPlan;
     } else {
       setPlanLoadObject((current) => ({
         state: "error",
@@ -32,6 +47,9 @@ function PlanListProvider({ children }) {
   }
 
   async function handleCreate(dtoIn) {
+    if (!loggedInUser) return;
+
+    dtoIn.userId = loggedInUser.id;
     setPlanLoadObject((current) => ({ ...current, state: "pending" }));
     const response = await fetch(`http://localhost:8000/readingPlan/create`, {
       method: "POST",
@@ -108,7 +126,7 @@ function PlanListProvider({ children }) {
   }
 
   const value = {
-    planState: planLoadObject.state,
+    state: planLoadObject.state,
     planList: planLoadObject.data || [],
     handlerMap: { handleCreate, handleUpdate, handleRecord },
   };

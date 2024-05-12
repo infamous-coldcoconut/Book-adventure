@@ -23,7 +23,7 @@ function BookProvider({ children }) {
   async function handleLoad() {
     setBookLoadObject((current) => ({ ...current, state: "pending" }));
     const response = await fetch(
-      `http://localhost:8000/book/get?id=${new URLSearchParams(
+      `http://localhost:8000/book/?id=${new URLSearchParams(
         location.search
       ).get("id")}`,
       {

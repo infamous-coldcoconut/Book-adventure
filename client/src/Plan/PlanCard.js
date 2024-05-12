@@ -5,9 +5,9 @@ import PlanDetail from "./PlanDetail";
 import PlanDateTimeBadge from "./PlanDateTimeBadge";
 
 import Icon from "@mdi/react";
-import {mdiEyeOutline, mdiPencil } from "@mdi/js";
+import {mdiPencil, mdiTrashCanOutline  } from "@mdi/js";
 
-function PlanCard({ readingPlan, setShowPlanForm }) {
+function PlanCard({ readingPlan, setShowPlanForm, setShowConfirmDeleteDialog }) {
   const navigate = useNavigate();
 
   return (
@@ -22,7 +22,18 @@ function PlanCard({ readingPlan, setShowPlanForm }) {
           alignItems: "center",
         }}
       >
+        <Button onClick={() => setShowPlanForm(readingPlan)} size={"sm"} style={buttonStyle()}>
+            <Icon path={mdiPencil} size={0.7} />
+        </Button>
         <Button
+            onClick={() => setShowConfirmDeleteDialog(readingPlan)}
+            size={"sm"}
+            variant="danger"
+            style={buttonStyle()}
+        >
+            <Icon path={mdiTrashCanOutline} size={0.7} />
+        </Button>
+        {/* <Button
           onClick={() => navigate("/planDetail?id=" + readingPlan.id)}
           size={"sm"}
         >
@@ -31,12 +42,19 @@ function PlanCard({ readingPlan, setShowPlanForm }) {
 
         <Button onClick={() => setShowPlanForm(readingPlan)} size={"sm"}>
           <Icon path={mdiPencil} size={0.7} />
-        </Button>
+        </Button> */}
       </div>
     </div>
   );
 }
 
+function buttonStyle(){
+  return {
+      color: "black",
+      backgroundColor: "lightgrey",
+      border: "solid black 1px"
+  }
+}
 function componentStyle() {
   return {
     margin: "12px auto",
