@@ -18,7 +18,7 @@ function PlanRoute({ setShowPlanForm }) {
       {readingPlan ? (
         <>
           <PlanDateTimeBadge readingPlan={readingPlan} />
-          {/* <PlanDetail readingPlan={readingPlan} /> */}
+          <PlanDetail readingPlan={readingPlan} />
           <div
             style={{
               display: "grid",
@@ -28,7 +28,7 @@ function PlanRoute({ setShowPlanForm }) {
             }}
           >
             <Button
-              onClick={() => navigate("/readingPlanDetail?id=" + readingPlan.id)}
+              onClick={() => navigate("/planDetail?id=" + readingPlan.id)}
               size={"sm"}
             >
               <Icon path={mdiEyeOutline} size={0.7} />

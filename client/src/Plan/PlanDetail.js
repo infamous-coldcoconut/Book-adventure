@@ -2,8 +2,6 @@ function PlanDetail({ readingPlan }) {
     return (
         <div>
             <div style={{display: "flex", rowGap: "4px", height: "30px"}}>
-                <div style={RecordStyle()}>{readingPlan.startDate}</div>
-                <div style={RecordStyle()}>{readingPlan.endDate}</div>
                 <div style={RecordStyle()}>{readingPlan.totalPages}</div>
                 <div style={RecordStyle()}>{readingPlan.totalBooks}</div>
             </div>
