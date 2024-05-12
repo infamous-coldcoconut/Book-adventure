@@ -27,7 +27,7 @@ function ConfirmDeleteDialog({ setShowConfirmDeleteDialog, book }) {
           dismissible
           onClose={() => setShowAlert(null)}
         >
-          <Alert.Heading>Nepodařilo se vytvořit událost</Alert.Heading>
+          <Alert.Heading>Failed to create a book</Alert.Heading>
           <pre>{showAlert}</pre>
         </Alert>
         {isPending ? (
@@ -35,7 +35,7 @@ function ConfirmDeleteDialog({ setShowConfirmDeleteDialog, book }) {
             <Icon path={mdiLoading} size={2} spin />
           </div>
         ) : null}
-        Opravdu chcete smazat událost {book.name}?
+        Do you really wants to delete a book {book.name}?
       </Modal.Body>
       <Modal.Footer>
         <Button
@@ -43,7 +43,7 @@ function ConfirmDeleteDialog({ setShowConfirmDeleteDialog, book }) {
           onClick={() => setShowConfirmDeleteDialog(false)}
           disabled={isPending}
         >
-          Zavřít
+          Close
         </Button>
         <Button
           type="submit"
@@ -59,7 +59,7 @@ function ConfirmDeleteDialog({ setShowConfirmDeleteDialog, book }) {
             }
           }}
         >
-          Smazat
+          Delete
         </Button>
       </Modal.Footer>
     </Modal>

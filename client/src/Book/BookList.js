@@ -18,6 +18,7 @@ function BookList() {
     const { loggedInUser } = useContext(UserContext);
     const navigate = useNavigate();
     const location = useLocation();
+    console.log(bookList)
 
     return (
     <Container>
@@ -28,7 +29,7 @@ function BookList() {
         </Button>
         </div>
 
-        {!!showBookForm ? <BookForm setShowBookForm={setShowBookForm} /> : null}
+        {!!showBookForm ? (<BookForm setShowBookForm={setShowBookForm} />) : null}
 
         {!!showConfirmDeleteDialog ? (
         <ConfirmDeleteDialog

@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { BookListContext } from "./BookListContext.js";
+import { UserContext } from "../User/UserContext";
 
 function BookListProvider({ children }) {
   const [bookLoadObject, setBookLoadObject] = useState({
@@ -22,18 +23,17 @@ function BookListProvider({ children }) {
       });
       return;
     }
-  }
 
-  async function handleLoad() {
     setBookLoadObject((current) => ({ ...current, state: "pending" }));
     const response = await fetch(`http://localhost:8000/book/list`, {
       method: "GET",
     });
     const responseJson = await response.json();
     if (response.status < 400) {
-      setBookLoadObject({ state: "ready", data: responseJson });
-      console.log(responseJson);
-      return responseJson;
+      const filteredBook = responseJson.filter(book => book.userId === loggedInUser.id);
+
+      setBookLoadObject({ state: "ready", data: filteredBook });
+      return filteredBook;
     } else {
       setBookLoadObject((current) => ({
         state: "error",
@@ -59,7 +59,6 @@ function BookListProvider({ children }) {
     if (response.status < 400) {
       setBookLoadObject((current) => {
         current.data.push(responseJson);
-        current.data.sort((a, b) => new Date(a.date) - new Date(b.date));
         return { state: "ready", data: current.data };
       });
       return responseJson;
@@ -86,7 +85,6 @@ function BookListProvider({ children }) {
           (e) => e.id === responseJson.id
         );
         current.data[bookIndex] = responseJson;
-        current.data.sort((a, b) => new Date(a.date) - new Date(b.date));
         return { state: "ready", data: current.data };
       });
       return responseJson;

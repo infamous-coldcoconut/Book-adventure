@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, useSearchParams, useNavigate } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 
 import { BookContext } from "./BookContext.js";
 

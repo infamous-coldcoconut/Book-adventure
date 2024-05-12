@@ -15,13 +15,14 @@ function BookForm({ setShowBookForm, book }) {
   const [showAlert, setShowAlert] = useState(null);
   const isPending = state === "pending";
 
+
   return (
     <Modal show={true} onHide={() => setShowBookForm(false)}>
       <Form
         onSubmit={async (e) => {
           e.preventDefault();
           e.stopPropagation();
-          var formData = Object.fromEntries(new FormData(e.target));
+          let formData = Object.fromEntries(new FormData(e.target));
           //formData.date = new Date(formData.date).toISOString();
           try {
             if (book.id) {
@@ -40,8 +41,8 @@ function BookForm({ setShowBookForm, book }) {
       >
         <Modal.Header>
           <Modal.Title>{`${
-            book.id ? "Edit" : "Create"
-          } a book`}</Modal.Title>
+            book.id ? "Upravit" : "Vytvořit"
+          } book`}</Modal.Title>
           <CloseButton onClick={() => setShowBookForm(false)} />
         </Modal.Header>
         <Modal.Body style={{ position: "relative" }}>
@@ -86,7 +87,7 @@ function BookForm({ setShowBookForm, book }) {
             onClick={() => setShowBookForm(false)}
             disabled={isPending}
           >
-            Zavřít
+            Close
           </Button>
           <Button type="submit" variant="primary" disabled={isPending}>
             {book.id ? "edit" : "Create"}

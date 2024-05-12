@@ -34,7 +34,6 @@ function PlanListProvider({ children }) {
       const filteredPlan = responseJson.filter(readingPlan => readingPlan.userId === loggedInUser.id);
 
       setPlanLoadObject({ state: "ready", data: filteredPlan });
-      console.log(filteredPlan);
       return filteredPlan;
     } else {
       setPlanLoadObject((current) => ({

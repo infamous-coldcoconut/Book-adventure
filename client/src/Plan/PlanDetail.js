@@ -2,8 +2,8 @@ function PlanDetail({ readingPlan }) {
     return (
         <div>
             <div style={{display: "flex", rowGap: "4px", height: "30px"}}>
-                <div style={RecordStyle()}>{readingPlan.totalPages}</div>
-                <div style={RecordStyle()}>{readingPlan.totalBooks}</div>
+                <div style={RecordStyle()}>Total pages to read:{readingPlan.totalPages}</div>
+                <div style={RecordStyle()}>Total books to read:{readingPlan.totalBooks}</div>
             </div>
         </div>
 )

@@ -10,7 +10,7 @@ import PlanRoute from "./Plan/PlanRoute";
 import ViewProgressProvider from "./Viewprogress/ViewProgressProvider";
 import ViewprogressRoute from "./Viewprogress/ViewprogressRoute";
 
-import BookProvider from "./Book/BookProvider";
+import BookListProvider from "./Book/BookListProvider";
 import BookRoute from "./Book/BookRoute";
 import BookList from "./Book/BookList";
 
@@ -43,20 +43,14 @@ function App() {
                 }
               />
 
-              {/* <Route
-                path="/book"
+               <Route
+                path="book"
                 element={
-                  <BookProvider>
-                    <BookRoute />
-                  </BookProvider>
+                  <BookListProvider>
+                    <BookList /> 
+                  </BookListProvider>
                 }
-              /> */}
-              <Route
-                path="/book"
-                element={
-                  <BookList /> 
-                }
-              />
+              /> 
               <Route path="*" element={"not found"} />
             </Route>
           </Routes>
