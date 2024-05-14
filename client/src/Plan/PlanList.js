@@ -70,21 +70,9 @@ function PlanList() {
         );
       })}
 
-      <div style={{display: 'flex', justifyContent: 'center'}}>
-          {!loggedInUser ? (
-              <a>Please log-in</a>
-          ) : (
-              location.pathname === "/" ? (
-                  <Button size="sm">
-                      <label>See more</label>
-                  </Button>
-              ) : (
-                  <Button size="sm" onClick={() => navigate("/")}>
-                      <label>See More</label>
-                  </Button>
-              )
-          )}
-      </div>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+             {!loggedInUser && <a>Please log-in</a>}
+        </div>
 
     </Container>
   );

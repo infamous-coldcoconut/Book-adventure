@@ -18,7 +18,6 @@ function BookList() {
     const { loggedInUser } = useContext(UserContext);
     const navigate = useNavigate();
     const location = useLocation();
-    console.log(bookList)
 
     return (
     <Container>
@@ -47,20 +46,8 @@ function BookList() {
         
             />
         ))}
-        <div style={{display: 'flex', justifyContent: 'center'}}>
-            {!loggedInUser ? (
-                <a>Please log-in</a>
-            ) : (
-                location.pathname === "/book" ? (
-                    <Button size="sm">
-                        <label>See more</label>
-                    </Button>
-                ) : (
-                    <Button size="sm" onClick={() => navigate("/book")}>
-                        <label>See More</label>
-                    </Button>
-                )
-            )}
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+             {!loggedInUser && <a>Please log-in</a>}
         </div>
         
     </Container>

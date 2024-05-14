@@ -10,7 +10,7 @@ import Alert from "react-bootstrap/Alert";
 import Icon from "@mdi/react";
 import { mdiLoading } from "@mdi/js";
 
-function BookForm({ setShowBookForm, book }) {
+function BookForm({ setShowBookForm, book = {} }) {
   const { state, handlerMap } = useContext(BookListContext);
   const [showAlert, setShowAlert] = useState(null);
   const isPending = state === "pending";
@@ -41,8 +41,8 @@ function BookForm({ setShowBookForm, book }) {
       >
         <Modal.Header>
           <Modal.Title>{`${
-            book.id ? "Upravit" : "Vytvořit"
-          } book`}</Modal.Title>
+            book.id ? "Edit" : "Create"
+          } a book`}</Modal.Title>
           <CloseButton onClick={() => setShowBookForm(false)} />
         </Modal.Header>
         <Modal.Body style={{ position: "relative" }}>

@@ -2,7 +2,6 @@ const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
 
-
 const readingPlanFolderPath = path.join(__dirname, "storage", "readingPlanList");
 
 function get(readingPlanId) {

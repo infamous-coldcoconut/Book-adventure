@@ -11,7 +11,7 @@ const schema = {
     id: { type: "string" },
     title: { type: "string"},
     pages: { type: "integer" },
-    icon: { type: "string", format: "dropdown" },
+    //icon: { type: "string", format: "dropdown" },
   },
   required: ["id"],
   additionalProperties: false,

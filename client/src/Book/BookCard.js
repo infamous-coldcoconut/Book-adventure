@@ -20,14 +20,14 @@ function BookCard({ book, setShowBookForm, setShowConfirmDeleteDialog }) {
           alignItems: "center",
         }}
       >
-        <Button
+        {/* <Button
           onClick={() => navigate("/bookDetail?id=" + book.id)}
           size={"sm"}
         >
           <Icon path={mdiEyeOutline} size={0.7} />
-        </Button>
+        </Button> */}
         
-        <Button onClick={() => setShowBookForm(book)} size={"sm"}>
+        <Button onClick={() => setShowBookForm(book)} size={"sm"} style={buttonStyle()}>
           <Icon path={mdiPencil} size={0.7} />
         </Button>
 
@@ -35,12 +35,22 @@ function BookCard({ book, setShowBookForm, setShowConfirmDeleteDialog }) {
           onClick={() => setShowConfirmDeleteDialog(book)}
           size={"sm"}
           variant="danger"
+          style={buttonStyle()}
+
         >
           <Icon path={mdiTrashCanOutline} size={0.7} />
         </Button>
       </div>
     </div>
   );
+}
+
+function buttonStyle(){
+  return {
+      color: "black",
+      backgroundColor: "lightgrey",
+      border: "solid black 1px"
+  }
 }
 
 function componentStyle() {

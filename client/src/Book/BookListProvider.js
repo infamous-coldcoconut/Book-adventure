@@ -46,6 +46,10 @@ function BookListProvider({ children }) {
   
 
   async function handleCreate(dtoIn) {
+    if (!loggedInUser) return;
+
+    dtoIn.userId = loggedInUser.id;
+    
     setBookLoadObject((current) => ({ ...current, state: "pending" }));
     const response = await fetch(`http://localhost:8000/book/create`, {
       method: "POST",

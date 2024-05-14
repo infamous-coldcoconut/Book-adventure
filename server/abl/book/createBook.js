@@ -8,11 +8,12 @@ const bookDao = require("../../dao/book-dao.js");
 const schema = {
   type: "object",
   properties: {
+    userId: { type: "string" },
     title: { type: "string"},
     pages: { type: "integer" },
     //icon: { type: "string", Format: "dropdown" },
   },
-  required: ["title", "pages"],
+  required: ["userId", "title", "pages"],
   additionalProperties: false,
 };
 
