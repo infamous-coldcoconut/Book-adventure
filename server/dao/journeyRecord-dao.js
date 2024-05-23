@@ -1,38 +1,31 @@
-// const fs = require("fs");
-// const path = require("path");
-
-// const journeyRecordFolderPath = path.join(__dirname, "storage", "journeyRecordList");
-
-// function update(journeyRecord) {
-//   try {
-//     const filePath = path.join(journeyRecordFolderPath, `${journeyRecord.id}.json`);
-//     const fileData = JSON.stringify(journeyRecord);
-//     fs.writeFileSync(filePath, fileData, "utf8");
-//     return journeyRecord;
-//   } catch (error) {
-//     throw { code: "failedToUpdateJourneyRecord", message: error.message };
-//   }
-// }
-
-// module.exports = {
-//   update,
-// };
-
 const fs = require("fs");
 const path = require("path");
+const crypto = require("crypto");
 
 const journeyRecordFolderPath = path.join(__dirname, "storage", "journeyRecordList");
 
 // Method to read an journeyRecord from a file
 function get(userId, readingPlanId) {
   try {
-    const jouneyRecordList = list();
-    const journeyRecord = jouneyRecordList.find(
+    const journeyRecordList = list();
+    const journeyRecord = journeyRecordList.find(
       (a) => a.userId === userId && a.readingPlanId === readingPlanId
     );
     return journeyRecord;
   } catch (error) {
-    throw { code: "failedToReadAttendance", message: error.message };
+    throw { code: "failedToReadJourneyRecord", message: error.message };
+  }
+}
+
+function create(journeyRecord) {
+  try {
+    journeyRecord.id = crypto.randomBytes(16).toString("hex");
+    const filePath = path.join(journeyRecordFolderPath, `${journeyRecord.id}.json`);
+    const fileData = JSON.stringify(journeyRecord);
+    fs.writeFileSync(filePath, fileData, "utf8");
+    return journeyRecord;
+  } catch (error) {
+    throw { code: "failedToCreateJourneyRecord", message: error.message };
   }
 }
 
@@ -48,21 +41,20 @@ function update(journeyRecord) {
 
     const filePath = path.join(
       journeyRecordFolderPath,
-      `${newJourneyRecord.userId}_${newJourneyRecord.readingPlanId}_${newJourneyRecord.journeyRecord}_${newJourneyRecord.guests}.txt`
+      `${newJourneyRecord.userId}_${newJourneyRecord.readingPlanId}_${newJourneyRecord.journeyRecord}_${newJourneyRecord.guests}.json`
     );
-    fs.writeFileSync(filePath, "", "utf8");
+    fs.writeFileSync(filePath, JSON.stringify(newJourneyRecord), "utf8");
     return newJourneyRecord;
   } catch (error) {
-    throw { code: "failedToUpdateAttendance", message: error.message };
+    throw { code: "failedToUpdateJourneyRecord", message: error.message };
   }
 }
 
-// Method to remove an journeyRecord from a file
 function remove(userId, readingPlanId) {
   try {
     const journeyRecord = get(userId, readingPlanId);
     if (journeyRecord) {
-      const filePath = path.join(journeyRecordFolderPath, journeyRecord.file);
+      const filePath = path.join(journeyRecordFolderPath, `${journeyRecord.id}.json`);
       fs.unlinkSync(filePath);
     }
     return {};
@@ -70,34 +62,28 @@ function remove(userId, readingPlanId) {
     if (error.code === "ENOENT") {
       return {};
     }
-    throw { code: "failedToRemoveAttendance", message: error.message };
+    throw { code: "failedToRemoveJourneyRecord", message: error.message };
   }
 }
 
-// Method to list attendances in a folder
 function list() {
   try {
     const files = fs.readdirSync(journeyRecordFolderPath);
-    const jouneyRecordList = files.map((file) => {
-      const journeyRecordData = file.replace(".txt", "").split("_");
-      return {
-        userId: journeyRecordData[0],
-        readingPlanId: journeyRecordData[1],
-        journeyRecord: journeyRecordData[2],
-        guests: Number(journeyRecordData[3]),
-        file,
-      };
+    const journeyRecordList = files.map((file) => {
+      const filePath = path.join(journeyRecordFolderPath, file);
+      const journeyRecordData = JSON.parse(fs.readFileSync(filePath, "utf8"));
+      return journeyRecordData;
     });
-    return jouneyRecordList;
+    return journeyRecordList;
   } catch (error) {
     throw { code: "failedToListAttendances", message: error.message };
   }
 }
 
 function readingPlanMap() {
-  const jouneyRecordList = list();
+  const journeyRecordList = list();
   const journeyRecordMap = {};
-  jouneyRecordList.forEach((journeyRecord) => {
+  journeyRecordList.forEach((journeyRecord) => {
     if (!journeyRecordMap[journeyRecord.readingPlanId])
       journeyRecordMap[journeyRecord.readingPlanId] = {};
     if (!journeyRecordMap[journeyRecord.readingPlanId][journeyRecord.userId])
@@ -111,9 +97,9 @@ function readingPlanMap() {
 }
 
 function userMap() {
-  const jouneyRecordList = list();
+  const journeyRecordList = list();
   const journeyRecordMap = {};
-  jouneyRecordList.forEach((journeyRecord) => {
+  journeyRecordList.forEach((journeyRecord) => {
     if (!journeyRecordMap[journeyRecord.userId])
       journeyRecordMap[journeyRecord.userId] = {};
     if (!journeyRecordMap[journeyRecord.userId][journeyRecord.readingPlanId])
@@ -128,6 +114,7 @@ function userMap() {
 
 module.exports = {
   get,
+  create,
   update,
   remove,
   list,

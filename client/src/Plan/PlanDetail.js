@@ -23,3 +23,6 @@ function PlanDetail({ readingPlan }) {
 }
 
 export default PlanDetail;
+
+
+

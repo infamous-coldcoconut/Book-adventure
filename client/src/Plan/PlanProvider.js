@@ -10,6 +10,7 @@ function PlanProvider({ children }) {
     data: null,
   });
   const location = useLocation();
+
   console.log(location);
 
   const [searchParams] = useSearchParams();
@@ -44,7 +45,7 @@ function PlanProvider({ children }) {
     }
   }
   const value = {
-    readingPlan: planLoadObject.data,
+    loggedInPlan: planLoadObject.data,
   };
 
   return (

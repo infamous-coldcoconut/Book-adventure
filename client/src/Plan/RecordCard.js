@@ -1,17 +1,19 @@
 import Button from "react-bootstrap/esm/Button.js";
 import { useNavigate } from "react-router-dom";
-import BookDetail from "./BookDetail";
+
+import RecordDetail from "./RecordDetail";
+import RecordDateTimeBadge from "./RecordDateTimeBadge";
 
 import Icon from "@mdi/react";
-import { mdiEyeOutline, mdiPencil, mdiTrashCanOutline } from "@mdi/js";
+import {mdiPencil, mdiTrashCanOutline, mdiBookEdit } from "@mdi/js";
 
-function BookCard({ book, setShowBookForm, setShowConfirmDeleteDialog }) {
+function PlanCard({ journeyRecord, setShowRecordForm, setShowConfirmDeleteDialog }) {
   const navigate = useNavigate();
 
   return (
     <div className="card border-0 shadow rounded" style={componentStyle()}>
-        <BookDetail book={book} />
-
+      <RecordDateTimeBadge journeyRecord={journeyRecord} />
+      <RecordDetail journeyRecord={journeyRecord} />
       <div
         style={{
           display: "grid",
@@ -20,20 +22,19 @@ function BookCard({ book, setShowBookForm, setShowConfirmDeleteDialog }) {
           alignItems: "center",
         }}
       >
-        
-        <Button onClick={() => setShowBookForm(book)} size={"sm"} style={buttonStyle()}>
-          <Icon path={mdiPencil} size={0.7} />
+        <Button onClick={() => setShowRecordForm(journeyRecord)} size={"sm"} style={buttonStyle()}>
+            <Icon path={mdiBookEdit} size={0.7} />
         </Button>
 
         <Button
-          onClick={() => setShowConfirmDeleteDialog(book)}
-          size={"sm"}
-          variant="danger"
-          style={buttonStyle()}
-
+            onClick={() => setShowConfirmDeleteDialog(journeyRecord)}
+            size={"sm"}
+            variant="danger"
+            style={buttonStyle()}
         >
-          <Icon path={mdiTrashCanOutline} size={0.7} />
+            <Icon path={mdiTrashCanOutline} size={0.7} />
         </Button>
+
       </div>
     </div>
   );
@@ -46,7 +47,6 @@ function buttonStyle(){
       border: "solid black 1px"
   }
 }
-
 function componentStyle() {
   return {
     margin: "12px auto",
@@ -58,4 +58,4 @@ function componentStyle() {
   };
 }
 
-export default BookCard;
+export default PlanCard;

@@ -25,12 +25,6 @@ function BookRoute({ setShowBookForm }) {
               alignItems: "center",
             }}
           >
-            <Button
-              onClick={() => navigate("/bookDetail?id=" + book.id)}
-              size={"sm"}
-            >
-              <Icon path={mdiEyeOutline} size={0.7} />
-            </Button>
             <Button onClick={() => setShowBookForm(book)} size={"sm"}>
               <Icon path={mdiPencil} size={0.7} />
             </Button>

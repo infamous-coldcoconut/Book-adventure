@@ -5,9 +5,9 @@ import PlanDetail from "./PlanDetail";
 import PlanDateTimeBadge from "./PlanDateTimeBadge";
 
 import Icon from "@mdi/react";
-import {mdiPencil, mdiTrashCanOutline  } from "@mdi/js";
+import {mdiPencil, mdiTrashCanOutline, mdiBookEdit, mdiEyeOutline   } from "@mdi/js";
 
-function PlanCard({ readingPlan, setShowPlanForm, setShowConfirmDeleteDialog }) {
+function PlanCard({ readingPlan, journeyRecord, setShowRecordForm, setShowPlanForm, setShowConfirmDeleteDialog }) {
   const navigate = useNavigate();
 
   return (
@@ -25,6 +25,11 @@ function PlanCard({ readingPlan, setShowPlanForm, setShowConfirmDeleteDialog }) 
         <Button onClick={() => setShowPlanForm(readingPlan)} size={"sm"} style={buttonStyle()}>
             <Icon path={mdiPencil} size={0.7} />
         </Button>
+
+        <Button onClick={() => setShowRecordForm(journeyRecord)} size={"sm"} style={buttonStyle()}>
+            <Icon path={mdiBookEdit} size={0.7} />
+        </Button>
+
         <Button
             onClick={() => setShowConfirmDeleteDialog(readingPlan)}
             size={"sm"}
@@ -33,16 +38,13 @@ function PlanCard({ readingPlan, setShowPlanForm, setShowConfirmDeleteDialog }) 
         >
             <Icon path={mdiTrashCanOutline} size={0.7} />
         </Button>
-        {/* <Button
-          onClick={() => navigate("/planDetail?id=" + readingPlan.id)}
+        <Button
+          onClick={() => navigate("/recordDetail?id=" + readingPlan.id)}
           size={"sm"}
         >
           <Icon path={mdiEyeOutline} size={0.7} />
         </Button>
 
-        <Button onClick={() => setShowPlanForm(readingPlan)} size={"sm"}>
-          <Icon path={mdiPencil} size={0.7} />
-        </Button> */}
       </div>
     </div>
   );

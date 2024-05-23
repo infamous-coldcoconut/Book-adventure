@@ -23,7 +23,6 @@ function BookForm({ setShowBookForm, book = {} }) {
           e.preventDefault();
           e.stopPropagation();
           let formData = Object.fromEntries(new FormData(e.target));
-          //formData.date = new Date(formData.date).toISOString();
           try {
             if (book.id) {
               formData.id = book.id;

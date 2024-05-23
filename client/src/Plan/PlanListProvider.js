@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext  } from "react";
 import { PlanListContext } from "./PlanListContext.js";
 import { UserContext } from "../User/UserContext";
-
+// import {PlanContext} from "./PlanContext.js"
 
 function PlanListProvider({ children }) {
   const [planLoadObject, setPlanLoadObject] = useState({
@@ -11,6 +11,7 @@ function PlanListProvider({ children }) {
   });
 
   const { loggedInUser } = useContext(UserContext);
+  // const {planList} = useContext(PlanContext);
 
   useEffect(() => {
     handleLoad();

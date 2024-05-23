@@ -3,10 +3,9 @@ const ajv = new Ajv();
 const validateDateTime = require("../../helpers/validate-date-time.js");
 ajv.addFormat("date-time", { validate: validateDateTime });
 
-const userDao = require("../../dao/user-dao.js");
-
-const readingPlanDao = require("../../dao/readingPlan-dao.js");
 const journeyRecordDao = require("../../dao/journeyRecord-dao.js");
+const readingPlanDao = require("../../dao/readingPlan-dao.js");
+const userDao = require("../../dao/user-dao.js");
 
 const schema = {
   type: "object",
@@ -14,19 +13,20 @@ const schema = {
     userId: { type: "string" },
     readingPlanId:{ type: "string"},
     bookId: { type: "string"},
+    date: { type: "string", format: "date-time" },
     pages: { type: "integer" },
     timeSpend: { type: "integer"}
-  },
-  required: ["id"],
+},
+  required: ["userId", "readingPlanId", "bookId"],
   additionalProperties: false,
 };
 
-async function UpdateRecord(req, res) {
+async function CreateRecord(req, res) {
   try {
-    let dtoIn  = req.body;
+    let journeyRecord = req.body;
 
-    dtoIn.pages = parseInt(dtoIn.pages);
-    dtoIn.timeSpend = parseInt(dtoIn.timeSpend);
+    journeyRecord.pages = parseInt(journeyRecord.pages);
+    journeyRecord.timeSpend = parseInt(journeyRecord.timeSpend);
 
     // validate input
     const valid = ajv.validate(schema, journeyRecord);
@@ -39,33 +39,29 @@ async function UpdateRecord(req, res) {
       return;
     }
 
-    // check if user exists
-    const user = userDao.get(dtoIn.userId);
+    const user = userDao.get(journeyRecord.userId);
     if (!user) {
       res.status(404).json({
         code: "userNotFound",
-        message: `User ${dtoIn.userId} not found`,
+        message: `User ${journeyRecord.userId} not found`,
       });
       return;
     }
 
-    const readingPlan = readingPlanDao.get(dtoIn.readingPlanId);
+    const readingPlan = readingPlanDao.get(journeyRecord.readingPlanId);
     if (!readingPlan) {
       res.status(404).json({
         code: "readingPlanNotFound",
-        message: `Reading Plan ${dtoIn.readingPlanId} not found`,
+        message: `readingPlan ${journeyRecord.readingPlanId} not found`,
       });
       return;
     }
 
-    let journeyRecord = journeyRecordDao.get(dtoIn.userId, dtoIn.readingPlanId);
-
-    journeyRecord = journeyRecordDao.update(journeyRecord);
-
+    journeyRecord = journeyRecordDao.create(journeyRecord);
     res.json(journeyRecord);
   } catch (e) {
     res.status(500).json({ message: e.message });
   }
 }
 
-module.exports = UpdateRecord;
+module.exports = CreateRecord;

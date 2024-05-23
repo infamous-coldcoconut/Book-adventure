@@ -4,9 +4,9 @@ import Layout from "./Layout";
 import PlanList from "./Plan/PlanList"
 import UserProvider from "./User/UserProvider";
 import PlanListProvider from ".//Plan/PlanListProvider";
-import PlanProvider from ".//Plan/PlanProvider";
-import PlanRoute from "./Plan/PlanRoute";
-
+import RecordListProvider from ".//Plan/RecordListProvider";
+import RecordList from "./Plan/RecordList";
+import PlanProvider from "./Plan/PlanProvider"
 import ViewProgressProvider from "./Viewprogress/ViewProgressProvider";
 import ViewprogressRoute from "./Viewprogress/ViewprogressRoute";
 
@@ -27,15 +27,17 @@ function App() {
                 }
               />
               <Route
-                path="/planDetail"
-                element={
-                  <PlanProvider>
-                    <PlanRoute />
-                  </PlanProvider>
-                }
-              />
+                  path="/recordDetail"
+                  element={
+                    <PlanProvider> 
+                      <RecordListProvider>
+                        <RecordList />
+                      </RecordListProvider>
+                    </PlanProvider>
+                  }
+                />
               <Route
-                path="/viewprogress"
+                path="viewprogress"
                 element={
                   <ViewProgressProvider>
                     <ViewprogressRoute />

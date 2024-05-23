@@ -5,9 +5,9 @@ import Button from "react-bootstrap/esm/Button.js";
 
 import PlanCard from "./PlanCard.js";
 import PlanForm from "./PlanForm.js";
+import RecordForm from "./RecordForm.js";
 import Container from "react-bootstrap/esm/Container.js";
 
-import BookForm from "../Book/BookForm.js";
 import {useNavigate, useLocation} from "react-router-dom";
 import {UserContext} from "../User/UserContext";
 
@@ -19,16 +19,11 @@ import ConfirmDeleteDialog from "./ConfirmDeleteDialog.js";
 function PlanList() {
   const { planList } = useContext(PlanListContext);
   const [showPlanForm, setShowPlanForm] = useState(false);
-  // const [showBookForm, setShowBookForm] = useState(false);
+  const [showRecordForm, setShowRecordForm] = useState(false);
   const [showConfirmDeleteDialog, setShowConfirmDeleteDialog] = useState(false);
   const { loggedInUser } = useContext(UserContext);
   const navigate = useNavigate();
   const location = useLocation();
-
-
-//   const filteredPlanList = readingPlanList.filter(
-//     (readingPlan) => new Date(readingPlan.startDate) > new Date()
-//   );
 
   return (
     <Container>
@@ -38,18 +33,17 @@ function PlanList() {
            Create a plan
         </Button>
 
-        {/* <Button variant="success" onClick={() => setShowBookForm({})}>
-          <Icon path={mdiPlusBoxOutline} size={1.5} color={"white"}/>{" "}
-          Create a book
+        {/* <Button variant="success" onClick={() => setShowRecordForm({})}>
+          <Icon path={mdiPlusBoxOutline} size={1.5} color={"white"} />
+           Create a record
         </Button> */}
       </div>
 
       {!!showPlanForm ? (
         <PlanForm readingPlan={showPlanForm} setShowPlanForm={setShowPlanForm} />
       ) : null}
-
-      {/* {!!showBookForm ? (
-        <BookForm book={showBookForm} setShowBookForm={setShowBookForm} />
+      {/* {!!showRecordForm ? (
+        <RecordForm journeyRecord={showRecordForm} setShowRecordForm={setShowRecordForm} />
       ) : null} */}
 
       {!!showConfirmDeleteDialog ? (
@@ -65,6 +59,7 @@ function PlanList() {
             key={readingPlan.id}
             readingPlan={readingPlan}
             setShowPlanForm={setShowPlanForm}
+            // setShowRecordForm={setShowRecordForm}
             setShowConfirmDeleteDialog={setShowConfirmDeleteDialog}
           />
         );
