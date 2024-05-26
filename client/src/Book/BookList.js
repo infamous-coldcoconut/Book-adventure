@@ -16,8 +16,8 @@ function BookList() {
     const [showBookForm, setShowBookForm] = useState(false);
     const [showConfirmDeleteDialog, setShowConfirmDeleteDialog] = useState(false);
     const { loggedInUser } = useContext(UserContext);
-    const navigate = useNavigate();
-    const location = useLocation();
+    console.log(bookList);
+
 
     return (
     <Container>
@@ -28,7 +28,8 @@ function BookList() {
         </Button>
         </div>
 
-        {!!showBookForm ? (<BookForm setShowBookForm={setShowBookForm} />) : null}
+        {!!showBookForm ? (
+            <BookForm book={showBookForm} setShowBookForm={setShowBookForm} />) : null}
 
         {!!showConfirmDeleteDialog ? (
         <ConfirmDeleteDialog
@@ -37,7 +38,8 @@ function BookList() {
         />
         ) : null}
 
-        {bookList.map((book) => (
+        {bookList.map((book) =>  {
+          return (
             <BookCard 
                 key={book.id} 
                 book={book} 
@@ -45,7 +47,8 @@ function BookList() {
                 setShowConfirmDeleteDialog={setShowConfirmDeleteDialog}
         
             />
-        ))}
+          );
+        })}
         <div style={{ display: 'flex', justifyContent: 'center' }}>
              {!loggedInUser && <a>Please log-in</a>}
         </div>

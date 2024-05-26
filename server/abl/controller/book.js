@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 
-//const GetBook = require("../abl/book/getBook");
 const GetBook = require("../book/getBook");
 const ListBook = require("../book/listBook");
 const CreateBook = require("../book/createBook");

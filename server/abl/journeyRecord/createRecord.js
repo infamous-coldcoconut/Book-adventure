@@ -14,6 +14,7 @@ const schema = {
     readingPlanId:{ type: "string"},
     bookId: { type: "string"},
     date: { type: "string", format: "date-time" },
+    books: { type: "integer" },
     pages: { type: "integer" },
     timeSpend: { type: "integer"}
 },
@@ -25,6 +26,7 @@ async function CreateRecord(req, res) {
   try {
     let journeyRecord = req.body;
 
+    journeyRecord.books = parseInt(journeyRecord.books);
     journeyRecord.pages = parseInt(journeyRecord.pages);
     journeyRecord.timeSpend = parseInt(journeyRecord.timeSpend);
 

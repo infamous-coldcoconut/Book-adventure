@@ -11,11 +11,7 @@ function PlanProvider({ children }) {
   });
   const location = useLocation();
 
-  console.log(location);
-
   const [searchParams] = useSearchParams();
-
-  console.log(searchParams.get("id"));
 
   useEffect(() => {
     handleLoad();

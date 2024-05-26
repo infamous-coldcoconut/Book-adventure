@@ -18,7 +18,6 @@ function RecordList() {
     const { loggedInUser } = useContext(UserContext);
     const navigate = useNavigate();
     const location = useLocation();
-    console.log(journeyRecordList);
 
     return (
     <Container>
@@ -29,7 +28,8 @@ function RecordList() {
         </Button>
         </div>
 
-        {!!showRecordForm ? (<RecordForm setShowRecordForm={setShowRecordForm} />) : null}
+        {!!showRecordForm ? (
+        <RecordForm journeyRecord={showRecordForm} setShowRecordForm={setShowRecordForm} />) : null}
 
         {!!showConfirmDeleteDialog ? (
         <ConfirmDeleteDialog

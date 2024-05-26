@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
 
 function RecordDetail({ journeyRecord }) {
-  const [book, setBookTitle] = useState("");
+  const [bookTitle, setBookTitle] = useState("");
 
   useEffect(() => {
+    if (!journeyRecord.bookId) return;
     async function fetchBookTitle() {
       try {
-        console.log(book);
-        const response = await fetch(`http://localhost:8000/book/get?id=${journeyRecord.bookId}`);
-        console.log(response);
+        const queryParam = journeyRecord.bookId ? `id=${journeyRecord.bookId}` : `title=${journeyRecord.bookTitle}`;
+        const response = await fetch(`http://localhost:8000/book/get?id=?${queryParam}`);
         const book = await response.json();
+        console.log(book);
+
         if (response.ok) {
           setBookTitle(book.title);
         } else {
@@ -26,7 +28,7 @@ function RecordDetail({ journeyRecord }) {
   return (
     <div>
       <div style={{ display: "flex", rowGap: "4px", height: "30px" }}>
-        <div style={RecordStyle()}>Book: {book}</div>
+        <div style={RecordStyle()}>Book: {bookTitle}</div>
         <div style={RecordStyle()}>Total pages read: {journeyRecord.pages}</div>
         <div style={RecordStyle()}>Total time read: {journeyRecord.timeSpend}</div>
       </div>

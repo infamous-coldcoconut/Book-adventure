@@ -9,7 +9,7 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
 import Icon from "@mdi/react";
-import { mdiBookshelf, mdiLogout, mdiAccount, mdiChartBar, mdiBook  } from "@mdi/js";
+import { mdiBookshelf, mdiLogout, mdiAccount, mdiBook  } from "@mdi/js";
 
 import Button from "react-bootstrap/esm/Button";
 
@@ -28,10 +28,6 @@ function NavBar() {
         </Navbar.Brand>
 
         <Nav className="ml-auto" style={{display:"flex", justifyContent: "flex-end"}}>
-          <Button variant="link" onClick={() => navigate("/viewProgress")}>
-            <Icon path={mdiChartBar} size={1.5} color={"black"} />
-          </Button>
-
           <Button variant="link" onClick={() => navigate("/book")}>
             <Icon path={mdiBook} size={1.5} color={"black"} />
           </Button>

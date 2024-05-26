@@ -6,15 +6,20 @@ const schema = {
   type: "object",
   properties: {
     id: { type: "string" },
+    title: { type: "string" },
+
   },
-  required: ["id"],
+  anyOf: [
+    { required: ["id"] },
+    { required: ["title"] },
+  ],
   additionalProperties: false,
 };
 
 async function GetBook(req, res) {
   try {
     // get request query or body
-    const reqParams = req.query?.id ? req.query : req.body;
+    const reqParams = req.query?.id || req.query?.title ? req.query : req.body;
 
     // validate input
     const valid = ajv.validate(schema, reqParams);
@@ -27,7 +32,14 @@ async function GetBook(req, res) {
       return;
     }
 
-    const book = bookDao.get(reqParams.id);
+    let book;
+    if (reqParams.id) {
+      book = bookDao.get(reqParams.id);
+    } else if (reqParams.title) {
+      const allBooks = bookDao.list();
+      book = allBooks.find(b => b.title === reqParams.title);
+    }
+
     if (!book) {
       res.status(404).json({
         code: "bookNotFound",

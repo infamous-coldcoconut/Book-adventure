@@ -85,10 +85,12 @@ function BookListProvider({ children }) {
 
     if (response.status < 400) {
       setBookLoadObject((current) => {
+        if (!current.data) return current;
         const bookIndex = current.data.findIndex(
           (e) => e.id === responseJson.id
         );
         current.data[bookIndex] = responseJson;
+        current.data.sort((a, b) => new Date(a.date) - new Date(b.date));
         return { state: "ready", data: current.data };
       });
       return responseJson;

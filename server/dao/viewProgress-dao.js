@@ -4,31 +4,38 @@ const path = require("path");
 const readingPlanFolderPath = path.join(__dirname, "storage", "readingPlanList");
 const journeyRecordFolderPath = path.join(__dirname, "storage", "journeyRecordList");
 
-function getByDateRange(startDate, endDate, folderPath) {
+function getAllData(folderPath) {
   try {
     const files = fs.readdirSync(folderPath);
-    const filteredData = [];
+    const allData = [];
 
     files.forEach((file) => {
       const filePath = path.join(folderPath, file);
       const fileData = fs.readFileSync(filePath, "utf8");
       const item = JSON.parse(fileData);
-
-      const itemDate = new Date(item.date);
-      const startDate = new Date(startDate);
-      const endDate = new Date(endDate);
-      if (itemDate >= startDate && itemDate <= endDate) {
-        filteredData.push(item);
-      }
+      allData.push(item);
     });
 
-    return filteredData;
+    return allData;
   } catch (error) {
     throw { code: "failedToGetData", message: error.message };
   }
 }
 
+function get(userId, readingPlanId) {
+  try {
+    const viewProgressList = list();
+    const viewProgress = viewProgressList.find(
+      (a) => a.userId === userId && a.readingPlanId === readingPlanId
+    );
+    return viewProgress;
+  } catch (error) {
+    throw { code: "failedToReadJourneyRecord", message: error.message };
+  }
+}
+
 module.exports = {
-  getReadingPlanByDateRange: (startDate, endDate) => getByDateRange(startDate, endDate, readingPlanFolderPath),
-  getJourneyRecordByDateRange: (startDate, endDate) => getByDateRange(startDate, endDate, journeyRecordFolderPath),
+  getAllReadingPlans: () => getAllData(readingPlanFolderPath),
+  getAllJourneyRecords: () => getAllData(journeyRecordFolderPath),
+  get
 };

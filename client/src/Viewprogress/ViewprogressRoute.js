@@ -1,15 +1,8 @@
 import { useContext } from "react";
-import { ViewprogressContext } from "./ViewprogressContext";
-import Button from "react-bootstrap/esm/Button.js";
+import { ViewprogressContext } from "./ViewProgressContext";
 import { useNavigate } from "react-router-dom";
 
-
-
-
-import Icon from "@mdi/react";
-import { mdiEyeOutline, mdiPencil } from "@mdi/js";
-
-function ViewprogressRoute({ setShowViewprogressForm }) {
+function ViewprogressRoute({}) {
   const navigate = useNavigate();
   const { Viewprogress } = useContext(ViewprogressContext);
 
@@ -26,9 +19,6 @@ function ViewprogressRoute({ setShowViewprogressForm }) {
               alignItems: "center",
             }}
           >
-            <Button onClick={() => setShowViewprogressForm(Viewprogress)} size={"sm"}>
-              <Icon path={mdiPencil} size={0.7} />
-            </Button>
           </div>
         </>
       ) : (

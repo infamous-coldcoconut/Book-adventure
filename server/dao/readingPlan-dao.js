@@ -76,34 +76,6 @@ function get(readingPlanId) {
     }
   }
 
-
-function getByDateRange(startDate, endDate) {
-  try {
-    const files = fs.readdirSync(readingPlanFolderPath);
-    const filteredPlans = [];
-
-    files.forEach((file) => {
-      const filePath = path.join(readingPlanFolderPath, file);
-      const fileData = fs.readFileSync(filePath, "utf8");
-      const plan = JSON.parse(fileData);
-
-      // Check if plan falls within the specified date range
-      const planStartDate = new Date(plan.startDate);
-      const planEndDate = new Date(plan.endDate);
-      const queryStartDate = new Date(startDate);
-      const queryEndDate = new Date(endDate);
-      if (planStartDate <= queryEndDate && planEndDate >= queryStartDate) {
-        filteredPlans.push(plan);
-      }
-    });
-
-    return filteredPlans;
-  } catch (error) {
-    throw { code: "failedToGetPlans", message: error.message };
-  }
-}
-
-
 module.exports = {
     get,
     create,

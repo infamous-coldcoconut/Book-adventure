@@ -9,7 +9,7 @@ import Alert from "react-bootstrap/Alert";
 import Icon from "@mdi/react";
 import { mdiLoading } from "@mdi/js";
 
-function ConfirmDeleteDialog({ setShowConfirmDeleteDialog, readingPlan }) {
+function ConfirmDeleteDialog({ setShowConfirmDeleteDialog, readingPlan, journeyRecord }) {
   const { state, handlerMap } = useContext(PlanListContext);
   const [showAlert, setShowAlert] = useState(null);
   const isPending = state === "pending";

@@ -3,15 +3,17 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./Layout";
 import PlanList from "./Plan/PlanList"
 import UserProvider from "./User/UserProvider";
+
 import PlanListProvider from ".//Plan/PlanListProvider";
+import PlanProvider from "./Plan/PlanProvider"
+
 import RecordListProvider from ".//Plan/RecordListProvider";
 import RecordList from "./Plan/RecordList";
-import PlanProvider from "./Plan/PlanProvider"
-import ViewProgressProvider from "./Viewprogress/ViewProgressProvider";
-import ViewprogressRoute from "./Viewprogress/ViewprogressRoute";
+
+import ViewProgressListProvider from ".//Viewprogress/ViewProgressListProvider";
+import ViewProgressList from "./Viewprogress/ViewProgressList";
 
 import BookListProvider from "./Book/BookListProvider";
-import BookRoute from "./Book/BookRoute";
 import BookList from "./Book/BookList";
 
 function App() {
@@ -37,11 +39,14 @@ function App() {
                   }
                 />
               <Route
-                path="viewprogress"
+                path="/viewProgress"
                 element={
-                  <ViewProgressProvider>
-                    <ViewprogressRoute />
-                  </ViewProgressProvider>
+                  <PlanProvider>
+                    <ViewProgressListProvider>
+                      <ViewProgressList />
+                    </ViewProgressListProvider>
+                  </PlanProvider> 
+
                 }
               />
 

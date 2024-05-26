@@ -28,7 +28,7 @@ async function fetchBookIdByTitle(title) {
     const response = await fetch(`http://localhost:8000/book/get?title=${encodeURIComponent(title)}`);
     const books = await response.json();
     if (response.ok && books.length > 0) {
-      setBookId(books[0].id);
+      setBookId(books.id);
     } else {
       throw new Error("Book not found");
     }
@@ -119,7 +119,7 @@ async function fetchBookIdByTitle(title) {
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Amount of time spend in minutes</Form.Label>
+            <Form.Label>Amount of time spent in minutes</Form.Label>
             <Form.Control
               type="number"
               name="timeSpend"

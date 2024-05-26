@@ -29,10 +29,10 @@ function create(journeyRecord) {
   }
 }
 
-// Method to update journeyRecord in a file
+// // Method to update journeyRecord in a file
 function update(journeyRecord) {
   try {
-    const currentJourneyRecord = get(journeyRecord.userId, journeyRecord.readingPlanId) || {};
+    const currentJourneyRecord = get(journeyRecord.userId, journeyRecord.readingPlanId);
     if (currentJourneyRecord.file) {
       const filePath = path.join(journeyRecordFolderPath, currentJourneyRecord.file);
       fs.unlinkSync(filePath);
@@ -49,6 +49,23 @@ function update(journeyRecord) {
     throw { code: "failedToUpdateJourneyRecord", message: error.message };
   }
 }
+
+// function update(journeyRecord) {
+//   try {
+//     const currentJourneyRecord = get(journeyRecord.userId, journeyRecord.readingPlanId);
+//     if (!currentJourneyRecord) {
+//       throw new Error("Journey record not found");
+//     }
+
+//     const newJourneyRecord = { ...currentJourneyRecord, ...journeyRecord };
+//     const filePath = path.join(journeyRecordFolderPath, `${currentJourneyRecord.id}.json`);
+//     const fileData = JSON.stringify(newJourneyRecord);
+//     fs.writeFileSync(filePath, fileData, "utf8");
+//     return newJourneyRecord;
+//   } catch (error) {
+//     throw { code: "failedToUpdateJourneyRecord", message: error.message };
+//   }
+// }
 
 function remove(userId, readingPlanId) {
   try {
@@ -90,7 +107,6 @@ function readingPlanMap() {
       journeyRecordMap[journeyRecord.readingPlanId][journeyRecord.userId] = {};
     journeyRecordMap[journeyRecord.readingPlanId][journeyRecord.userId] = {
       journeyRecord: journeyRecord.journeyRecord,
-      guests: journeyRecord.guests,
     };
   });
   return journeyRecordMap;
@@ -106,7 +122,6 @@ function userMap() {
       journeyRecordMap[journeyRecord.userId][journeyRecord.readingPlanId] = {};
     journeyRecordMap[journeyRecord.userId][journeyRecord.readingPlanId] = {
       journeyRecord: journeyRecord.journeyRecord,
-      guests: journeyRecord.guests,
     };
   });
   return journeyRecordMap;

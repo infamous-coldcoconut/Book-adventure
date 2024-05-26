@@ -1,3 +1,3 @@
 import { createContext } from "react";
 
-export const ViewprogressContext = createContext();
+export const ViewProgressContext = createContext();

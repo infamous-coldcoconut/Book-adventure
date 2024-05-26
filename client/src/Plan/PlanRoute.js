@@ -38,9 +38,6 @@ function PlanRoute({ setShowPlanForm, setShowRecordForm }) {
             <Button onClick={() => setShowPlanForm(readingPlan)} size={"sm"}>
               <Icon path={mdiPencil} size={0.7} />
             </Button>
-            <Button onClick={() => setShowRecordForm(journeyRecord)} size={"sm"}>
-              <Icon path={mdiBookEdit} size={0.7} />
-            </Button>
           </div>
         </>
       ) : (

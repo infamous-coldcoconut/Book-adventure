@@ -10,11 +10,10 @@ import Alert from "react-bootstrap/Alert";
 import Icon from "@mdi/react";
 import { mdiLoading } from "@mdi/js";
 
-function BookForm({ setShowBookForm, book = {} }) {
+function BookForm({ setShowBookForm, book }) {
   const { state, handlerMap } = useContext(BookListContext);
   const [showAlert, setShowAlert] = useState(null);
   const isPending = state === "pending";
-
 
   return (
     <Modal show={true} onHide={() => setShowBookForm(false)}>
@@ -22,7 +21,7 @@ function BookForm({ setShowBookForm, book = {} }) {
         onSubmit={async (e) => {
           e.preventDefault();
           e.stopPropagation();
-          let formData = Object.fromEntries(new FormData(e.target));
+          var formData = Object.fromEntries(new FormData(e.target));
           try {
             if (book.id) {
               formData.id = book.id;

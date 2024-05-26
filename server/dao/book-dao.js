@@ -15,6 +15,22 @@ function get(bookId) {
     throw { code: "failedToReadBook", message: error.message };
   }
 }
+function getByTitle(title) {
+  try {
+    const files = fs.readdirSync(bookFolderPath);
+    for (const file of files) {
+      const filePath = path.join(bookFolderPath, file);
+      const fileData = fs.readFileSync(filePath, "utf8");
+      const book = JSON.parse(fileData);
+      if (book.title === title) {
+        return book;
+      }
+    }
+    return null;
+  } catch (error) {
+    throw { code: "failedToReadBook", message: error.message };
+  }
+}
 
 // Method to write an book to a file
 function create(book) {
@@ -59,7 +75,7 @@ function remove(bookId) {
 }
 
 // Method to list books in a folder
-function list(userId) {
+function list() {
   try {
     const files = fs.readdirSync(bookFolderPath);
     const bookList = files.map((file) => {
@@ -74,6 +90,7 @@ function list(userId) {
 
 module.exports = {
   get,
+  getByTitle,
   create,
   update,
   remove,

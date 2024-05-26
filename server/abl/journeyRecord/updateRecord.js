@@ -11,9 +11,11 @@ const journeyRecordDao = require("../../dao/journeyRecord-dao.js");
 const schema = {
   type: "object",
   properties: {
-    userId: { type: "string" },
-    readingPlanId:{ type: "string"},
-    bookId: { type: "string"},
+    // userId: { type: "string" },
+    // readingPlanId:{ type: "string"},
+    // bookId: { type: "string"},
+    id: {type: "string"},
+    books: { type: "integer" },
     pages: { type: "integer" },
     timeSpend: { type: "integer"}
   },
@@ -25,6 +27,7 @@ async function UpdateRecord(req, res) {
   try {
     let dtoIn  = req.body;
 
+    dtoIn.books = parseInt(dtoIn.books);
     dtoIn.pages = parseInt(dtoIn.pages);
     dtoIn.timeSpend = parseInt(dtoIn.timeSpend);
 

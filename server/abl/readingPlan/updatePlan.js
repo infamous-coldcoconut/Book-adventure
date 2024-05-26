@@ -11,13 +11,6 @@ const schema = {
     id: { type: "string" },
     startDate: { type: "string", format: "date-time" },
     endDate: { type: "string", format: "date-time" },
-    // listOfBooks:[
-    //   {
-    //      id: {type: "string"},
-    //      totalPages:{type: "integer"},
-    //      totalBooks:{type: "integer"},
-    //    }
-    // ]
     totalPages: { type: "integer" },
     totalBooks: { type: "integer" },
   },
@@ -47,7 +40,7 @@ async function UpdateAbl(req, res) {
     if (!updatedReadingPlan) {
       res.status(404).json({
         code: "readingPlanNotFound",
-        message: `Event ${readingPlan.id} not found`,
+        message: `readingPlan ${readingPlan.id} not found`,
       });
       return;
     }
