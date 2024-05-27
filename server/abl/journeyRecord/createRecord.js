@@ -14,6 +14,7 @@ const schema = {
     readingPlanId:{ type: "string"},
     bookId: { type: "string"},
     date: { type: "string", format: "date-time" },
+    title: {type:"string"},
     books: { type: "integer" },
     pages: { type: "integer" },
     timeSpend: { type: "integer"}

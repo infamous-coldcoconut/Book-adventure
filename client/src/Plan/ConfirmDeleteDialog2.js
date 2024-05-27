@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { PlanListContext } from "./PlanListContext.js";
+import { RecordListContext } from "./RecordListContext.js";
 
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
@@ -9,16 +9,16 @@ import Alert from "react-bootstrap/Alert";
 import Icon from "@mdi/react";
 import { mdiLoading } from "@mdi/js";
 
-function ConfirmDeleteDialog({ setShowConfirmDeleteDialog, readingPlan }) {
-  const { state, handlerMap } = useContext(PlanListContext);
+function ConfirmDeleteDialog({ setShowConfirmDeleteDialog2, journeyRecord }) {
+  const { state, handlerMap } = useContext(RecordListContext);
   const [showAlert, setShowAlert] = useState(null);
   const isPending = state === "pending";
 
   return (
-    <Modal show={true} onHide={() => setShowConfirmDeleteDialog(false)}>
+    <Modal show={true} onHide={() => setShowConfirmDeleteDialog2(false)}>
       <Modal.Header>
-        <Modal.Title>DeletePlan</Modal.Title>
-        <CloseButton onClick={() => setShowConfirmDeleteDialog(false)} />
+        <Modal.Title>DeleteRecord</Modal.Title>
+        <CloseButton onClick={() => setShowConfirmDeleteDialog2(false)} />
       </Modal.Header>
       <Modal.Body style={{ position: "relative" }}>
         <Alert
@@ -27,7 +27,7 @@ function ConfirmDeleteDialog({ setShowConfirmDeleteDialog, readingPlan }) {
           dismissible
           onClose={() => setShowAlert(null)}
         >
-          <Alert.Heading>Failed to create a plan</Alert.Heading>
+          <Alert.Heading>Failed to create a record</Alert.Heading>
           <pre>{showAlert}</pre>
         </Alert>
         {isPending ? (
@@ -35,12 +35,12 @@ function ConfirmDeleteDialog({ setShowConfirmDeleteDialog, readingPlan }) {
             <Icon path={mdiLoading} size={2} spin />
           </div>
         ) : null}
-        Do you really wants to delete a plan?
+        Do you really wants to delete a record ?
       </Modal.Body>
       <Modal.Footer>
         <Button
           variant="secondary"
-          onClick={() => setShowConfirmDeleteDialog(false)}
+          onClick={() => setShowConfirmDeleteDialog2(false)}
           disabled={isPending}
         >
           Close
@@ -51,8 +51,8 @@ function ConfirmDeleteDialog({ setShowConfirmDeleteDialog, readingPlan }) {
           disabled={isPending}
           onClick={async (e) => {
             try {
-              await handlerMap.handleDelete({ id: readingPlan.id });
-              setShowConfirmDeleteDialog(false);
+              await handlerMap.handleDelete({ id: journeyRecord.id });
+              setShowConfirmDeleteDialog2(false);
             } catch (e) {
               console.error(e);
               setShowAlert(e.message);

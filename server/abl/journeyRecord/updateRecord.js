@@ -11,10 +11,10 @@ const journeyRecordDao = require("../../dao/journeyRecord-dao.js");
 const schema = {
   type: "object",
   properties: {
-    // userId: { type: "string" },
-    // readingPlanId:{ type: "string"},
-    // bookId: { type: "string"},
+
     id: {type: "string"},
+    title: {type:"string"},
+
     books: { type: "integer" },
     pages: { type: "integer" },
     timeSpend: { type: "integer"}

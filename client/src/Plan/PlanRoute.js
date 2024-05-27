@@ -8,12 +8,11 @@ import PlanDateTimeBadge from "./PlanDateTimeBadge";
 import PlanDetail from "./PlanDetail";
 
 import Icon from "@mdi/react";
-import { mdiEyeOutline, mdiPencil, mdiBookEdit } from "@mdi/js";
+import { mdiEyeOutline, mdiPencil } from "@mdi/js";
 
-function PlanRoute({ setShowPlanForm, setShowRecordForm }) {
+function PlanRoute({ setShowPlanForm  }) {
   const navigate = useNavigate();
   const { readingPlan } = useContext(PlanContext);
-  const { journeyRecord } = useContext(RecordContext);
 
   return (
     <div className="card border-0 shadow rounded" style={componentStyle()}>

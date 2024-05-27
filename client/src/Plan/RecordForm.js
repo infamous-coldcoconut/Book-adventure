@@ -98,17 +98,27 @@ async function fetchBookIdByTitle(title) {
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Book</Form.Label>
+            <Form.Label>Book title</Form.Label>
             <Form.Control
               type="text "
               name="title"
               required
-              // defaultValue={journeyRecord.bookId}
-              onChange={(e) => setBookTitle(e.target.value)}
-              onBlur={() => fetchBookIdByTitle(title)}
+              defaultValue={journeyRecord.title}
+              // onChange={(e) => setBookTitle(e.target.value)}
+              // onBlur={() => fetchBookIdByTitle(title)}
             />
           </Form.Group>
       
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Amount of books</Form.Label>
+            <Form.Control
+              type="number"
+              name="books"
+              required
+              defaultValue={journeyRecord.books}
+            />
+          </Form.Group>
+
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Amount of pages</Form.Label>
             <Form.Control

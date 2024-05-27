@@ -153,8 +153,6 @@ function PlanListProvider({ children }) {
     }
   }
 
-  
-
   const value = {
     state: planLoadObject.state,
     planList: planLoadObject.data || [],

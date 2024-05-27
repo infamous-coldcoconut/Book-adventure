@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import { ViewProgressContext } from "./ViewProgressContext.js";
 
 function ViewProgressProvider({ children }) {
-  const [progressLoadObject, setProgressLoadObject] = useState({
+  const [viewProgressLoadObject, setViewProgressList] = useState({
     state: "ready",
     error: null,
     data: null,
@@ -15,7 +15,7 @@ function ViewProgressProvider({ children }) {
   }, []);
 
   async function handleLoad() {
-    setProgressLoadObject((current) => ({ ...current, state: "pending" }));
+    setViewProgressList((current) => ({ ...current, state: "pending" }));
     try {
       // Fetch reading plan data
       const readingPlanResponse = await fetch(
@@ -39,12 +39,12 @@ function ViewProgressProvider({ children }) {
       const journeyRecordJson = await journeyRecordResponse.json();
 
       if (readingPlanResponse.status < 400 && journeyRecordResponse.status < 400) {
-        setProgressLoadObject({ state: "ready", data: { readingPlan: readingPlanJson, journeyRecord: journeyRecordJson } });
+        setViewProgressList({ state: "ready", data: { readingPlan: readingPlanJson, journeyRecord: journeyRecordJson } });
       } else {
         throw new Error(JSON.stringify(readingPlanJson || journeyRecordJson, null, 2));
       }
     } catch (error) {
-      setProgressLoadObject((current) => ({
+      setViewProgressList((current) => ({
         state: "error",
         data: current.data,
         error: error.message,
@@ -53,7 +53,8 @@ function ViewProgressProvider({ children }) {
   }
 
   const value = {
-    viewProgress: progressLoadObject.data,
+    state: viewProgressLoadObject.state,
+    viewProgress: viewProgressLoadObject.data,
   };
 
   return (

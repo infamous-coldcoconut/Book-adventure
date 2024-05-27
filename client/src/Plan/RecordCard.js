@@ -7,7 +7,7 @@ import RecordDateTimeBadge from "./RecordDateTimeBadge";
 import Icon from "@mdi/react";
 import {mdiPencil, mdiTrashCanOutline, mdiBookEdit } from "@mdi/js";
 
-function PlanCard({ journeyRecord, setShowRecordForm, setShowConfirmDeleteDialog }) {
+function PlanCard({ journeyRecord, setShowRecordForm, setShowConfirmDeleteDialog2 }) {
   const navigate = useNavigate();
 
   return (
@@ -27,7 +27,7 @@ function PlanCard({ journeyRecord, setShowRecordForm, setShowConfirmDeleteDialog
         </Button>
 
         <Button
-            onClick={() => setShowConfirmDeleteDialog(journeyRecord)}
+            onClick={() => setShowConfirmDeleteDialog2(journeyRecord)}
             size={"sm"}
             variant="danger"
             style={buttonStyle()}

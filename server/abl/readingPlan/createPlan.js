@@ -11,15 +11,8 @@ const schema = {
     userId: { type: "string" },
     startDate: { type: "string", format: "date-time" },
     endDate: { type: "string", format: "date-time" },
-    // listOfBooks:[
-    //   {
-    //      id: {type: "string"},
-    //      totalPages:{type: "integer"},
-    //      totalBooks:{type: "integer"},
-    //    }
-    // ]
     totalPages: { type: "integer"},
-    totalBooks: { type: "integer" },
+    totalBooks: { type: "integer" }
   },
   required: ["userId", "startDate", "endDate", "totalPages", "totalBooks"],
   additionalProperties: false,

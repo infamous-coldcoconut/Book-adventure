@@ -7,6 +7,7 @@ import Container from "react-bootstrap/esm/Container.js";
 import Icon from "@mdi/react";
 import { mdiPlusBoxOutline } from "@mdi/js";
 import ConfirmDeleteDialog from "./ConfirmDeleteDialog.js";
+import ConfirmDeleteDialog2 from "./ConfirmDeleteDialog2.js";
 import {useNavigate, useLocation} from "react-router-dom";
 import {UserContext} from "../User/UserContext";
 
@@ -14,7 +15,7 @@ import {UserContext} from "../User/UserContext";
 function RecordList() {
     const { journeyRecordList } = useContext(RecordListContext); 
     const [showRecordForm, setShowRecordForm] = useState(false);
-    const [showConfirmDeleteDialog, setShowConfirmDeleteDialog] = useState(false);
+    const [showConfirmDeleteDialog2, setShowConfirmDeleteDialog2] = useState(false);
     const { loggedInUser } = useContext(UserContext);
     const navigate = useNavigate();
     const location = useLocation();
@@ -31,10 +32,10 @@ function RecordList() {
         {!!showRecordForm ? (
         <RecordForm journeyRecord={showRecordForm} setShowRecordForm={setShowRecordForm} />) : null}
 
-        {!!showConfirmDeleteDialog ? (
-        <ConfirmDeleteDialog
-            journeyRecord={showConfirmDeleteDialog}
-            setShowConfirmDeleteDialog={setShowConfirmDeleteDialog}
+        {!!showConfirmDeleteDialog2 ? (
+        <ConfirmDeleteDialog2
+            journeyRecord={showConfirmDeleteDialog2}
+            setShowConfirmDeleteDialog2={setShowConfirmDeleteDialog2}
         />
         ) : null}
 
@@ -43,7 +44,7 @@ function RecordList() {
                 key={journeyRecord.id} 
                 journeyRecord={journeyRecord} 
                 setShowRecordForm={setShowRecordForm}
-                setShowConfirmDeleteDialog={setShowConfirmDeleteDialog}
+                setShowConfirmDeleteDialog2={setShowConfirmDeleteDialog2}
         
             />
         ))}

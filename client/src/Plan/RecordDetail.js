@@ -1,34 +1,35 @@
 import React, { useState, useEffect } from "react";
 
 function RecordDetail({ journeyRecord }) {
-  const [bookTitle, setBookTitle] = useState("");
+  // const [bookTitle, setBookTitle] = useState("");
 
-  useEffect(() => {
-    if (!journeyRecord.bookId) return;
-    async function fetchBookTitle() {
-      try {
-        const queryParam = journeyRecord.bookId ? `id=${journeyRecord.bookId}` : `title=${journeyRecord.bookTitle}`;
-        const response = await fetch(`http://localhost:8000/book/get?id=?${queryParam}`);
-        const book = await response.json();
-        console.log(book);
+  // useEffect(() => {
+  //   if (!journeyRecord.bookId) return;
+  //   async function fetchBookTitle() {
+  //     try {
+  //       const queryParam = journeyRecord.bookId ? `id=${journeyRecord.bookId}` : `title=${journeyRecord.bookTitle}`;
+  //       const response = await fetch(`http://localhost:8000/book/get?id=?${queryParam}`);
+  //       const book = await response.json();
+  //       console.log(book);
 
-        if (response.ok) {
-          setBookTitle(book.title);
-        } else {
-          throw new Error(book.error);
-        }
-      } catch (error) {
-        console.error("Error fetching book title:", error);
-      }
-    }
+  //       if (response.ok) {
+  //         setBookTitle(book.title);
+  //       } else {
+  //         throw new Error(book.error);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching book title:", error);
+  //     }
+  //   }
 
-    fetchBookTitle();
-  }, [journeyRecord.bookId]);
+  //   fetchBookTitle();
+  // }, [journeyRecord.bookId]);
 
   return (
     <div>
       <div style={{ display: "flex", rowGap: "4px", height: "30px" }}>
-        <div style={RecordStyle()}>Book: {bookTitle}</div>
+        <div style={RecordStyle()}>Book: {journeyRecord.title}</div>
+        <div style={RecordStyle()}>Total books read: {journeyRecord.books}</div>
         <div style={RecordStyle()}>Total pages read: {journeyRecord.pages}</div>
         <div style={RecordStyle()}>Total time read: {journeyRecord.timeSpend}</div>
       </div>

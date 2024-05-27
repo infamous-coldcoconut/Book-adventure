@@ -17,7 +17,7 @@ function EventDateTimeBadge({ journeyRecord }) {
   function componentStyle() {
     return {
       width: "88px",
-      backgroundColor: "#d63232",
+      backgroundColor: "coral",
       display: "grid",
       height: "max-content",
     };
@@ -42,7 +42,7 @@ function EventDateTimeBadge({ journeyRecord }) {
       fontSize: "20px",
       lineHeight: 1,
       padding: "4px 4px 8px 4px",
-      background: "#187bcd",
+      background: "#48d3b0",
       color: "white",
     };
   }

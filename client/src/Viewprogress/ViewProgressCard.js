@@ -2,7 +2,6 @@ import ViewProgressDetail from "./ViewProgressDetail"
 import PlanDateTimeBadge from "../Plan/PlanDateTimeBadge";
 
 function ViewProgressCard({ readingPlan, journeyRecord}) {
-  
   return (
     <div className="card border-0 shadow rounded" style={componentStyle()}>
         <PlanDateTimeBadge readingPlan={readingPlan} />

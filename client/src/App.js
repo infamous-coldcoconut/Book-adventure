@@ -51,7 +51,7 @@ function App() {
               />
 
                <Route
-                path="book"
+                path="/book"
                 element={
                   <BookListProvider>
                     <BookList /> 
@@ -74,7 +74,7 @@ function componentStyle() {
     display: "flex",
     flexDirection: "column",
     overflow: "hidden",
-    backgroundColor: "#187bcd",
+    backgroundColor: "#f5a571",
   };
 }
 

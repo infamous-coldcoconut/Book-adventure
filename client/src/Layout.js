@@ -29,7 +29,7 @@ function bodyStyle() {
 }
 
 function footerStyle() {
-  return { padding: "8px", textAlign: "center", backgroundColor: "#557a04" };
+  return { padding: "8px", textAlign: "center", backgroundColor: "#23b2c4" };
 }
 
 export default Layout;

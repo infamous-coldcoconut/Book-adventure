@@ -23,7 +23,7 @@ function NavBar() {
         <Navbar.Brand>
           <Button style={brandStyle()} onClick={() => navigate("/")}>
             <Icon path={mdiBookshelf} size={1.5} color={"orange"}/>
-            Book adventure
+            MyBookPlan
           </Button>
         </Navbar.Brand>
 
